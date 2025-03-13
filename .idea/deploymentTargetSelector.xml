@@ -4,20 +4,14 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-05-22T08:08:11.787577Z">
+        <DropdownSelection timestamp="2025-03-13T08:48:54.294499Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=/Users/Luis/.android/avd/Pixel_8_API_33_13.0_.avd" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\anaza\.android\avd\Pixel_XL_API_27.avd" />
             </handle>
           </Target>
         </DropdownSelection>
         <DialogSelection />
-      </SelectionState>
-      <SelectionState runConfigName="QuizEspressoTests">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="ExtraEspressoTest">
-        <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
   </component>
