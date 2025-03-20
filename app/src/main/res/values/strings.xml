@@ -13,7 +13,7 @@
     <string name="no_button">No</string>
     <string name="yes_button">Yes</string>
 
-    <string name="empty_answer">\???</string>
+    <string name="empty_answer">"???"</string>
     <string name="empty_result">\???</string>
 
     <string name="warning_message">Are you sure?</string>

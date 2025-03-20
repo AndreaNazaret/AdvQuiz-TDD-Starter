@@ -9,6 +9,8 @@ public interface CheatContract {
 
     void displayAnswerData(CheatViewModel viewModel);
     void finishView();
+
+
   }
 
   interface Presenter {
@@ -17,6 +19,8 @@ public interface CheatContract {
 
     void onResumeCalled();
     void onCreateCalled();
+
+
     void onRecreateCalled();
 
       void onPauseCalled();

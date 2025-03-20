@@ -34,9 +34,9 @@
             android:id="@+id/option1Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button"
-            android:tag="1"
             android:onClick="onOptionButtonClicked"
+            android:tag="1"
+            android:text="Button"
             tools:text="Option 1" />
 
         <Button
@@ -84,8 +84,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:text="Button"
             android:onClick="onNextButtonClicked"
+            android:text="Button"
             tools:text="Next" />
 
         <Space
@@ -98,8 +98,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:text="Button"
             android:onClick="onCheatButtonClicked"
+            android:text="Button"
             tools:text="Cheat" />
     </LinearLayout>
 

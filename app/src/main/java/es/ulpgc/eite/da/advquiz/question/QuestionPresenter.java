@@ -29,14 +29,22 @@ public class QuestionPresenter implements QuestionContract.Presenter {
     state = new QuestionState();
 
     // TODO: include code if necessary
-  }
+    state.result= model.getEmptyResultText();
+    state.question=model.getQuestion();
+    state.option1= model.getOption1();
+    state.option2= model.getOption2();
+    state.option3= model.getOption3();
 
+    enableAnswerButtons();
+  }
 
   @Override
   public void onRecreatedCalled() {
     Log.e(TAG, "onRecreatedCalled");
 
     // TODO: include code if necessary
+    state = mediator.getQuestionState();
+    model.setQuizIndex(state.quizIndex);
   }
 
 
@@ -45,10 +53,17 @@ public class QuestionPresenter implements QuestionContract.Presenter {
     Log.e(TAG, "onResumeCalled");
 
     // TODO: include code if necessary
-
+    CheatToQuestionState savedState = mediator.getCheatToQuestionState();
+    if (savedState != null) {
+      if (savedState.cheated) { //si el estado que se pasa es true porque se ha visto la respuesta
+          disableAnswerButtons();
+          state.result=model.getIncorrectResultText();
+          view.get().displayQuestionData(state);
+          return;
+      }
+    }
     // update the view
     view.get().displayQuestionData(state);
-
   }
 
 
@@ -57,12 +72,15 @@ public class QuestionPresenter implements QuestionContract.Presenter {
     Log.e(TAG, "onPauseCalled");
 
     // TODO: include code if necessary
+    mediator.setQuestionState(state);
 
   }
 
   @Override
   public void onDestroyCalled() {
     Log.e(TAG, "onDestroyCalled");
+    // Reset current state
+    //mediator.resetCheatState();
   }
 
   @Override
@@ -70,6 +88,21 @@ public class QuestionPresenter implements QuestionContract.Presenter {
     Log.e(TAG, "onOptionButtonClicked");
 
     // TODO: include code if necessary
+    boolean answer = model.isCorrectOption(option);
+
+    Log.e(TAG, "Respuesta correcta: " + model.getCorrectAnswer());
+    Log.e(TAG, "Opción seleccionada: " + option);
+
+    if(answer){
+      state.result=model.getCorrectResultText();
+      disableAnswerButtons();
+      state.cheatEnabled=false;
+    }else{
+      state.result=model.getIncorrectResultText();
+      disableAnswerButtons();
+      state.cheatEnabled=true;
+    }
+    view.get().displayQuestionData(state);
   }
 
   @Override
@@ -77,6 +110,21 @@ public class QuestionPresenter implements QuestionContract.Presenter {
     Log.e(TAG, "onNextButtonClicked");
 
     // TODO: include code if necessary
+
+    model.incrQuizIndex();
+    state.quizIndex= model.getQuizIndex();
+
+    state.question= model.getQuestion();
+    state.option1= model.getOption1();
+    state.option2= model.getOption2();
+    state.option3= model.getOption3();
+    state.result=model.getEmptyResultText();
+
+    enableAnswerButtons();
+    state.nextEnabled=false;
+
+    view.get().displayQuestionData(state);
+
   }
 
   @Override
@@ -84,6 +132,33 @@ public class QuestionPresenter implements QuestionContract.Presenter {
     Log.e(TAG, "onCheatButtonClicked");
 
     // TODO: include code if necessary
+    String correctAnswer= model.getCorrectAnswer();
+    QuestionToCheatState newState = new QuestionToCheatState(correctAnswer);
+    mediator.setQuestionToCheatState(newState);
+
+    view.get().navigateToCheatScreen();
+  }
+
+  @Override
+  public void disableAnswerButtons() {
+    Log.e(TAG, "disableAnswerButtons");
+
+    // TODO: include code if necessary
+    state.optionEnabled=false;
+    state.nextEnabled=true;
+
+  }
+
+
+  @Override
+  public void enableAnswerButtons() {
+    Log.e(TAG, "enableAnswerButtons");
+
+    // TODO: include code if necessary
+
+    state.optionEnabled=true;
+    state.nextEnabled=false;
+    state.cheatEnabled=true;
   }
 
 

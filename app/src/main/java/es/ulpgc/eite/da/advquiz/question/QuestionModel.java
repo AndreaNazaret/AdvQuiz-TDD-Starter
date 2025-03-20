@@ -1,5 +1,7 @@
 package es.ulpgc.eite.da.advquiz.question;
 
+import android.util.Log;
+
 public class QuestionModel implements QuestionContract.Model {
 
   public static String TAG = "AdvQuiz.QuestionModel";
@@ -44,6 +46,7 @@ public class QuestionModel implements QuestionContract.Model {
     return false;
   }
 
+
   @Override
   public int getQuizIndex() {
     return quizIndex;
@@ -71,8 +74,9 @@ public class QuestionModel implements QuestionContract.Model {
 
   @Override
   public String getCorrectAnswer() {
-    int index= Integer.valueOf(quizArray[quizIndex+4]);
-    return quizArray[quizIndex+index];
+    int index = Integer.valueOf(quizArray[quizIndex+4]); // Revisa que este índice es correcto
+    Log.e(TAG, "El índice de la respuesta correcta es: " + index);
+    return quizArray[quizIndex + index];
   }
 
   @Override

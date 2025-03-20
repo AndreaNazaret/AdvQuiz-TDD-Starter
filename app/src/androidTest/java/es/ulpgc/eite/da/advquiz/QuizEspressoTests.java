@@ -166,7 +166,7 @@ public class QuizEspressoTests {
   }
 
   @Test
-  public void test02question1Correct() {
+  public void  test02question1Correct() {
 
     //GIVEN
     //encontrándonos en pantalla Question

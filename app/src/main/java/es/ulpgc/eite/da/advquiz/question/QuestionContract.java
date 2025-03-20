@@ -13,6 +13,10 @@ public interface QuestionContract {
   }
 
   interface Presenter {
+    void disableAnswerButtons();
+
+    void enableAnswerButtons();
+
     void injectView(WeakReference<View> view);
     void injectModel(Model model);
 
@@ -30,14 +34,23 @@ public interface QuestionContract {
 
   interface Model {
     String getQuestion();
+
     String getOption1();
+
     String getOption2();
+
     String getOption3();
+
     boolean isCorrectOption(int option);
+
     boolean hasQuizFinished();
+
     int getQuizIndex();
+
     void setQuizIndex(int index);
+
     String getCorrectAnswer();
+
     void incrQuizIndex();
 
     String getCorrectResultText();
@@ -51,6 +64,7 @@ public interface QuestionContract {
     String getEmptyResultText();
 
     void setEmptyResultText(String text);
-  }
 
+
+  }
 }

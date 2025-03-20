@@ -4,6 +4,7 @@ public class QuestionViewModel {
 
   // put the view state here
 
+
   public String question;
   public String option1;
   public String option2;

@@ -18,7 +18,7 @@ public class CheatModel implements CheatContract.Model {
 
   @Override
   public void setCorrectAnswer(String answer) {
-    this.correctAnswer =answer;
+    this.correctAnswer = answer;
   }
 
   @Override

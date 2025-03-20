@@ -2,6 +2,7 @@ package es.ulpgc.eite.da.advquiz.question;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ public class QuestionActivity
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_question);
     setTitle(R.string.question_screen_title);
+
 
     ((TextView) findViewById(R.id.nextButton)).setText(R.string.next_button);
     ((TextView) findViewById(R.id.cheatButton)).setText(R.string.cheat_button);
@@ -70,7 +72,7 @@ public class QuestionActivity
 
   @Override
   public void displayQuestionData(QuestionViewModel viewModel) {
-    //Log.e(TAG, "displayQuestionData");
+    Log.e(TAG, "displayQuestionData");
 
     // deal with the answer
     ((TextView) findViewById(R.id.questionTextView)).setText(viewModel.question);

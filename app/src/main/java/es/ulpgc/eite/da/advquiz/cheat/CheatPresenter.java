@@ -27,10 +27,28 @@ public class CheatPresenter implements CheatContract.Presenter {
   public void onCreateCalled() {
     Log.e(TAG, "onCreateCalled");
 
-    // init the state
-    state = new CheatState();
-
     // TODO: include code if necessary
+    // Inicializar el estado
+
+    initializeState();
+
+    // Recuperar el estado guardado de la pantalla anterior
+    restoreStateFromPreviousScreen();
+
+  }
+  private void initializeState() {
+    state = new CheatState();
+    state.answer = model.getAnswerEmptyText();
+    state.buttonEnabled=true;
+
+  }
+
+  private void restoreStateFromPreviousScreen() {
+    QuestionToCheatState savedState = mediator.getQuestionToCheatState();
+    if (savedState != null) {
+      state.answer = savedState.answer;
+      model.setCorrectAnswer(savedState.answer);
+    }
   }
 
   @Override
@@ -38,6 +56,7 @@ public class CheatPresenter implements CheatContract.Presenter {
     Log.e(TAG, "onRecreateCalled");
 
     // TODO: include code if necessary
+    state = mediator.getCheatState();
   }
 
   @Override
@@ -56,6 +75,7 @@ public class CheatPresenter implements CheatContract.Presenter {
     Log.e(TAG, "onPauseCalled");
 
     // TODO: include code if necessary
+    mediator.setCheatState(state);
   }
 
   @Override
@@ -69,6 +89,10 @@ public class CheatPresenter implements CheatContract.Presenter {
     Log.e(TAG, "onBackButtonPressed");
 
     // TODO: include code if necessary
+
+    CheatToQuestionState newState = new CheatToQuestionState(true);
+    mediator.setCheatToQuestionState(newState);
+    view.get().finishView();
   }
 
   @Override
@@ -76,6 +100,37 @@ public class CheatPresenter implements CheatContract.Presenter {
     Log.e(TAG, "onWarningButtonClicked");
 
     // TODO: include code if necessary
+
+    if(option==1){
+      Log.e(TAG, "onYesButtenCliked");
+      CheatToQuestionState newState = new CheatToQuestionState(true);
+      mediator.setCheatToQuestionState(newState);
+
+      state.buttonEnabled=false;
+
+      String correctAnswer = model.getCorrectAnswer();
+      Log.e(TAG, "Correct Answer from Model: " + correctAnswer);
+
+      state.answer=correctAnswer;
+      if (view.get() != null) {
+        CheatViewModel viewModel = new CheatViewModel();
+        viewModel.answer = state.answer;
+        viewModel.buttonEnabled = state.buttonEnabled;
+
+        Log.e(TAG, "Enviando a la vista: " + viewModel.answer);
+        view.get().displayAnswerData(viewModel);
+      } else {
+        Log.e(TAG, "ERROR: La vista no está disponible en onWarningButtonClicked");
+      }
+
+
+    }else{
+      Log.e(TAG, "onNoButtenCliked");
+      CheatToQuestionState newState = new CheatToQuestionState(false);
+      mediator.setCheatToQuestionState(newState);
+
+      view.get().finishView();
+    }
   }
 
 
